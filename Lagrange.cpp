@@ -38,5 +38,5 @@ int main(){
     vector<double>x = {4,12,19};
     vector<double>y = {1,3,4};
     Lagrage lg = Lagrage(x,y);
-    cout<<lg.root(7)<<endl; //38.14
+    cout<<lg.root(7)<<endl; //
 }   

@@ -6,7 +6,7 @@ class Euler{
 private:
     db px,py,h,x;
     db f(db x,db y){
-        return -y;
+        return x+y;
     }
 public:
     Euler(db px,db py, db h, db x){
@@ -25,6 +25,6 @@ public:
 };
 
 int main(){
-    Euler euler = Euler(0, 1,0.01, 0.04);
+    Euler euler = Euler(0, 1,0.1, 0.02);
     cout << euler.solve() << endl;
 }

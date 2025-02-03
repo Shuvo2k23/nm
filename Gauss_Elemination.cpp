@@ -1,18 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define db double
 class GaussElimination {
 private:
     int n;
-    double** matrix;
+    vector<vector<db>>matrix;
 
 public:
     GaussElimination(int n) {
         this->n = n;
-        matrix = new double*[n];
-        for (int i = 0; i < n; i++) {
-            matrix[i] = new double[n + 1];
-        }
+        matrix.resize(n+1,vector<db>(n+1));
     }
 
     void inputMatrix() {
@@ -33,30 +31,25 @@ public:
     }
 
     void eliminate() {
-        for(int i=0;i<n;i++){ //for every column
-            for(int j=i+1;j<n;j++){     //for every row
-                double c = -matrix[j][i]/matrix[i][i];
-                for(int k=i;k<=n;k++)   //for every element in a row
-                    matrix[j][k] += c*matrix[i][k] ;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                db c = matrix[j][i]/matrix[i][i];
+                for(int k=i;k<=n;k++)
+                    matrix[j][k] -= c*matrix[i][k];
             }
         }
     }
 
     void solve() {
-        double* x = new double[n];
-        for (int i = n - 1; i >= 0; i--) {
-            x[i] = matrix[i][n] / matrix[i][i];
-            for(int j=i-1;j>=0;j--)
-            matrix[j][n]-=x[i]*matrix[j][i];
-           
+        vector<db>a(n);
+        for(int i =n-1;i>=0;i--){
+            a[i] = matrix[i][n]/ matrix[i][i];
+            for(int j=0;j<n;j++)
+            matrix[j][n]-=a[i]*matrix[j][i];
         }
-
-        cout << "Solution: ";
-        for (int i = 0; i < n; i++) {
-            cout << x[i] << " ";
-        }
-        cout << endl;
-
+        cout<<"solution:\n";
+        for(db x:a)
+        cout<<x<<" ";
     }
 
     
